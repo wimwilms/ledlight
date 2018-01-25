@@ -10,7 +10,12 @@ public class Lpd8806Strip implements Strip {
     }
 
     @Override
-    public void showSolidColor(int red, int green, int blue) {
-        ledstrip.fill(red, green, blue);
+    public void showSolidColor(Color color) {
+        ledstrip.fill(color.getRed(), color.getGreen(), color.getBlue());
+    }
+
+    @Override
+    public void showColor(int led, Color color) {
+        ledstrip.setLed(led, color.getRed(), color.getGreen(), color.getBlue());
     }
 }

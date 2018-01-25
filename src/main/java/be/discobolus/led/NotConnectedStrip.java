@@ -5,7 +5,12 @@ public class NotConnectedStrip implements Strip {
     }
 
     @Override
-    public void showSolidColor(int red, int green, int blue) {
-        System.out.println("Red: " + red + ", Green: " + green + ", Blue: " + blue);
+    public void showSolidColor(Color color) {
+        System.out.println("Red: " + color.getRed() + ", Green: " + color.getGreen() + ", Blue: " + color.getBlue());
+    }
+
+    @Override
+    public void showColor(int led, Color color) {
+        System.out.println("Led : " + led + ", Red: " + color.getRed() + ", Green: " + color.getGreen() + ", Blue: " + color.getBlue());
     }
 }

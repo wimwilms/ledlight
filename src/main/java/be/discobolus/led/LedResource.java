@@ -1,18 +1,16 @@
 package be.discobolus.led;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.List;
 
 @RestController
 @RequestMapping("/led")
 public class LedResource {
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
-
     @Resource
     private LightStrip lightStrip;
 
@@ -22,6 +20,16 @@ public class LedResource {
                                @RequestParam(value="green", defaultValue="0")int green,
                                @RequestParam(value="blue", defaultValue="0") int blue) {
         lightStrip.showSolidColor(red, green, blue);
+    }
+
+    @RequestMapping("/solid/multiple")
+    public void showSolidColors(@RequestBody List<Color> colors) {
+        lightStrip.showDifferentSolidColors(colors);
+    }
+
+    @RequestMapping("/solid/multiple/fade")
+    public void showSolidFadingColors(@RequestBody List<Color> colors) {
+        lightStrip.showDifferentFadingColors(colors);
     }
 
     @RequestMapping("/rainbow")
