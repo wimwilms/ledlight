@@ -69,6 +69,7 @@ public class LightStrip {
     }
 
     private void showDifferentColors(List<Color> colors, TriFunction<Color, Integer, Integer, Color> calculateColor) {
+        stopCurrentRun();
         int numberOfColors = colors.size();
         if (numberOfColors > numberOfLeds) {
             throw new RuntimeException("To many colors");
@@ -77,7 +78,7 @@ public class LightStrip {
         int ledsWithoutClearColor = numberOfLeds % numberOfColors;
 
         int numberOfLedsForOneColor = numberOfLeds / numberOfColors;
-        int totalLedNumber = 0;
+        int totalLedNumber = 1;
         for (Color color : colors) {
             for (int i = 0; i < numberOfLedsForOneColor + (ledsWithoutClearColor > 0 ? 1 : 0); i++) {
                 strip.showColor(totalLedNumber, calculateColor.apply(color, i, numberOfLedsForOneColor));
